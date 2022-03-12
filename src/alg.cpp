@@ -1,40 +1,27 @@
-@@ -1,25 +1,26 @@
 // Copyright 2021 NNTU-CS
 int cbinsearch(int *arr, int size, int value) {
-  int i = 0, j = size - 1;
-  int ind1 = 0, ind2 = 0;
-  if (arr[j] == value) {
-    ind1 = j+1;
-  }
-  if (arr[i] == value) {
-    ind2 = i;
-  }
-  while (i < j) {
-    int mid = i + (j - i) / 2;
-      if (arr[mid] == value && arr[mid + 1] != value) {
-          ind1 = mid+1;
+  //  поместить сюда реализацию алгоритма
+  int k = 0;
+  int min = 0;
+  int max = size-1;
+  int mid = (max+min)/2;
+  if (value <= arr[mid]) {
+      for (int i=mid; i >= min; i--) {
+          if (arr[i] == value)
+          k++;
+          if (arr[i] != value && k != 0)
           break;
-      
-      } else if (arr[mid] <= value) {
-          i = mid + 1;
-       
-      } else {
-          j = mid;
       }
   }
-
-  i = 0, j = size - 1;
-@@ -28,10 +29,11 @@ int cbinsearch(int *arr, int size, int value) {
-    if (arr[mid] == value && arr[mid - 1] != value) {
-        ind2 = mid;
-        break;
-   
-    } else if (arr[mid] >= value) {
-        j = mid;
-     
-    } else {
-        i = mid + 1;
-    }
+  if (value >= arr[mid]) {
+      for (int i=mid+1; i <= max; i++) {
+          if (arr[i] == value)
+          k++;
+          if (arr[i] != value && k != 0)
+          break;
+      }
   }
-  return ind1-ind2;
+  if (k != 0)
+  return k;
+  return 0; // если ничего не найдено
 }
